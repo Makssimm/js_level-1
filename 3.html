@@ -30,8 +30,26 @@
 -->
 <script>
   "use strict";
+  /**
+   * функиция принимает целое положительное число в диапазоне от 0 до 1000  и \
+   возвращает объект с тремя свойстами: количество единиц, десятков и сотен в \
+   числе
+   * @ param {number} - число, которое будем разбивать на разряды
+   */
+  function getDigitsOfNumber(number){
+    if (!Number.isInteger || number < 0 || number > 999){
+      console.error('Ошибка!');
+      return {};
+    }
+    else return {
+    units: number % 10,
+    dozens: (number % 100 - number % 10) / 10,
+    hundreds: (number % 1000 - number % 100) / 100,
+    };
+  }
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  let ourObject = getDigitsOfNumber(1210);
+  console.log(ourObject);
 </script>
 </body>
 </html>

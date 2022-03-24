@@ -50,7 +50,90 @@
 <script>
   "use strict";
 
-  // Здесь пишем решение, данный комментарий необходимо стереть.
+  function PostES5(authorName, text){
+    this.authorName = authorName;
+    this.text = text;
+    this.date = new Date();
+  }
+  PostES5.prototype.edit = function(newText){
+    this.text = newText;
+    this.date = new Date();
+  }
+
+  let firstPost = new PostES5('Alexey', 'Lorem ipsum dolor sit amet consectetur\
+   adipisicing elit. Nobis!'); 
+  document.write(`<br> Автор: ${firstPost.authorName} <br> ${firstPost.text} \
+  <br> Дата: ${firstPost.date} <br>`);
+  firstPost.edit('Хотя, нет');
+  document.write(`<br> Автор: ${firstPost.authorName} <br> ${firstPost.text} \
+  <br> Дата: ${firstPost.date}<br>`);
+
+
+
+  class PostES6{
+    constructor(authorName, text){
+      this.authorName = authorName;
+      this.text = text;
+      this.date = new Date();
+    }
+    edit(newText){
+      this.text = newText;
+      this.date = new Date();
+    }
+  }
+
+  let secondPost = new PostES6('Oleg', 'Lorem ipsum dolor sit amet consectetur\
+   adipisicing elit. Aut quae blanditiis beatae distinctio possimus non'); 
+  document.write(`<br> Автор: ${secondPost.authorName} <br> ${secondPost.text} \
+  <br> Дата: ${secondPost.date} <br>`);
+  secondPost.edit('Хотя, нет');
+  document.write(`<br> Автор: ${secondPost.authorName} <br> ${secondPost.text} \
+  <br> Дата: ${secondPost.date}<br>`);
+
+
+
+  function AttachedPostES5(authorName, text, highlighted){
+    PostES5.call(this, authorName, text);
+    this.highlighted = false;
+  }
+  AttachedPostES5.prototype = Object.create(PostES5.prototype);
+  AttachedPostES5.prototype.makeTextHighlighted = function(){
+    this.highlighted = true;
+    this.date = new Date();
+  }
+
+  let thirdPost = new AttachedPostES5('Sergey', 'Lorem ipsum dolor sit amet consectetur\
+   adipisicing elit. Nobis!'); 
+  document.write(`<br> Автор: ${thirdPost.authorName} <br> ${thirdPost.text} \
+  <br> Дата: ${thirdPost.date} <br>`);
+  thirdPost.edit('Хотя, нет');
+  thirdPost.makeTextHighlighted();
+  document.write(`<br> Автор: ${thirdPost.authorName} <br> ${thirdPost.text} \
+  <br> Дата: ${thirdPost.date} <br>`);
+  console.log(thirdPost);
+
+
+  class AttachedPostES6 extends PostES6{
+    constructor(authorName, text, highlighted){
+      super(authorName, text);
+      this.highlighted = false;
+    }
+    makeTextHighlighted(){
+    this.highlighted = true;
+    this.date = new Date();
+  }
+  }
+
+  let forthPost = new AttachedPostES6('Vladimir', 'Lorem ipsum dolor sit amet consectetur\
+   adipisicing elit'); 
+  document.write(`<br> Автор: ${forthPost.authorName} <br> ${forthPost.text} \
+  <br> Дата: ${forthPost.date} <br>`);
+  forthPost.edit('Хотя, нет');
+  forthPost.makeTextHighlighted();
+  document.write(`<br> Автор: ${forthPost.authorName} <br> ${forthPost.text} \
+  <br> Дата: ${forthPost.date} <br>`);
+  console.log(forthPost);
+
 </script>
 </body>
 </html>
