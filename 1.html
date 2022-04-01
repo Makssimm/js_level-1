@@ -42,19 +42,25 @@
   /*
   1. Установите всем элементам с классом "productName" размер шрифта 24px.
    */
-  const productsNameEl = document.querySelectorAll('.productName');
-  productsNameEl.forEach(el => el.style.fontSize = '24px');
+  const productNameEls = document.querySelectorAll('.productName');
+  productNameEls.forEach(el => el.style.fontSize = '24px');
   /*
   2. Установите всем элементам с классом "product" внешний отступ справа 50px.
    */
-  const productsEl = document.querySelectorAll('.product');
-  productsEl.forEach(el => el.style.marginRight = '50px');
+  const productEls = document.querySelectorAll('.product');
+  productEls.forEach(el => el.style.marginRight = '50px');
 
   /*
   3. При клике на кнопку "В корзину" название кнопки должно поменяться на
   "Добавлено" и кнопка должна стать неактивной.
    */
-
+  const buttonEls = document.querySelectorAll('button');
+  for (const elem of buttonEls) {
+    elem.addEventListener('click', () => {
+      elem.textContent = 'Добавлено';
+      elem.disabled = true;
+    });
+  }
 
   /*
   4. Создайте полную (глубокую) копию элемента с классом product, измените в
@@ -65,17 +71,16 @@
   должен правильно работать код из 3-го задания.
    */
   const productElClone = document.querySelector('.product').cloneNode(true);
-  document.querySelector('body').appendChild(productElClone);
   productElClone.querySelector('.productName').textContent = 'Товар 4';
   productElClone.querySelector('img').src =
    'https://picsum.photos/id/1080/200/300';
-  document.q 
-
+  document.querySelector('.product:last-of-type').replaceWith(productElClone);
+  /* но код из третьего задания не работает..*/
   /*
   5. По истечению 2 секунд с момента открытия страницы первый товар должен быть
   удален из html.
    */
-
+  setTimeout(() => document.querySelector('.product').remove(), 2000);
 
 </script>
 </body>

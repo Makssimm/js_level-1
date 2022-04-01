@@ -65,7 +65,11 @@
   должно моментально отображаться в span. То есть при печати в input'е тег span
   также должен меняться.
   */
-
+  const idFromEl = document.getElementById('from');
+  const spanEl = document.querySelector('span');
+  idFromEl.addEventListener('input', event => {
+    spanEl.innerText = event.target.value;
+  });
 
   /*
   2. При клике на кнопку с классом messageBtn необходимо элементу с классом
@@ -73,7 +77,12 @@
   1) добавить два класса: animate__animated и animate__fadeInLeftBig
   2) поставить данному элементу стиль visibility в значение 'visible'.
    */
-
+  const messageBtnEl = document.querySelector('.messageBtn');
+  const messageEl = document.querySelector('.message');
+  messageBtnEl.addEventListener('click', event => {
+    messageEl.classList.add('animate__animated', 'animate__fadeInLeftBig');
+    messageEl.style.visibility = 'visible';
+  });
 
   /*
   3. Необходимо при отправке формы проверить, заполнены ли все поля в этой
@@ -86,8 +95,20 @@
   данному полю).
   Если поле было чем-либо заполнено, подсветку (класс error) необходимо убрать.
    */
-
-
+  const formEl = document.querySelector('form');
+  const formControlEls = formEl.querySelectorAll('input, select');
+  // console.log(formEl);
+  // console.log(formControlEls);
+  formEl.addEventListener( 'sumbit', event => {
+    formControlEls.forEach(formControlEl => {
+      if (formControlEl.value === '') {
+        formControlEl.classList.add('error');
+        event.preventDefault();
+      }
+    });
+  });
+  /* в процессе наладки пришлось подглядывать, потом практически все списал, 
+  потом списал буква в букву.. но оно все равно не работает! даже интересно */
 </script>
 </body>
 </html>
